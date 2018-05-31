@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+     parameters {
+        string(defaultValue: "", description: 'What environment?', name: 'Environment')
+        // choices are newline separated
+        choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'region')
+    }
+    tools {
+        maven 'jenkin_maven'
+        jdk 'JDK1.8'
+    }
+    stages 
+    {
+        stage ('Checkout')
+        {
+            steps 
+            {
+                git (
+                    url: 'https://github.com/Lalmasthan/DevAppDemo.git',
+                    credentialsId: '8111124c-6312-40b0-995a-3d4c130ea8dd'
+                )
+            }
+            
+        }
+    }
+}
